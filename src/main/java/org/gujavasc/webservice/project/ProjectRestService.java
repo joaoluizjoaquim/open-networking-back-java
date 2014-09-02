@@ -3,8 +3,10 @@ package org.gujavasc.webservice.project;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -25,6 +27,18 @@ public class ProjectRestService {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response create(Project project){
+		return Response.accepted(project).build();
+	}
+	
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response update(Project project){
+		return Response.accepted(project).build();
+	}
+	
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response delete(Project project){
 		return Response.accepted(project).build();
 	}
 	
