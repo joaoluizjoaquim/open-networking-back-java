@@ -23,6 +23,7 @@ public class ProjectRestService {
 	}
 	
 	@POST
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response create(Project project){
 		return Response.accepted(project).build();
 	}
