@@ -1,5 +1,11 @@
 package org.gujavasc.webservice.event;
 
-public interface EventEndpoint {
+import java.util.ArrayList;
+import java.util.List;
 
+public interface EventEndpoint {
+	
+	public default List<Event> findByName(String name){
+		return new ArrayList<>();
+	}
 }
