@@ -9,12 +9,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 
 @Path("events")
-public class EventResource implements EventEndpoint{
+public class EventController{
 
 	@Inject
 	private EventService service;
 	
-	@Override
 	@GET
 	public List<Event> findByName(@NotNull @QueryParam("q") String name){
 		return service.findByName(name);
