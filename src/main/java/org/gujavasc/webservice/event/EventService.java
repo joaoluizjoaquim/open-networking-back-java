@@ -4,5 +4,7 @@ import java.util.List;
 
 public interface EventService {
 
-	public List<Event> findByName(String name);
+	List<Event> findByName(String name);
+	
+	Event findById(Long id);
 }

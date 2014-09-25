@@ -14,7 +14,9 @@ public class EventJPAImpl implements EventDAO {
 	
 	@Override
 	public List<Event> findByName(String name) {
-		return new ArrayList<>();
+		ArrayList<Event> arrayList = new ArrayList<>();
+		arrayList.add(new Event(1, "teste"));
+		return arrayList;
 	}
 
 }

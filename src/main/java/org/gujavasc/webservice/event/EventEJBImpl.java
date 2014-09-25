@@ -17,4 +17,8 @@ public class EventEJBImpl implements EventService {
 		return dao.findByName(name);
 	}
 	
+	public Event findById(Long id){
+		return new Event(1, "teste");
+	}
+	
 }

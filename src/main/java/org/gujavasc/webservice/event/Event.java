@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -20,12 +21,10 @@ public class Event {
 	@NotNull
 	private String name;
 	
-	@OneToMany
-	private Set<Participant> participants;
+	@ManyToMany
+	private Set<Participant> participants = new HashSet<Participant>();
 	
-	public Event() {
-		participants = new HashSet<Participant>();
-	}
+	public Event() {}
 	
 	public Event(Integer id,String name) {
 		this();
