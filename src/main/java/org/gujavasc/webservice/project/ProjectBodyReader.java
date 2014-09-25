@@ -17,8 +17,7 @@ import javax.ws.rs.ext.Provider;
 public class ProjectBodyReader implements MessageBodyReader<Project> {
 
 	@Override
-	public boolean isReadable(Class<?> type, Type genericType,
-			Annotation[] annotations, MediaType mediaType) {
+	public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
 		return Project.class == type;
 	}
 

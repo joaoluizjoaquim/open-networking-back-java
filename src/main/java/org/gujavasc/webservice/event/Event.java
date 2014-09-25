@@ -1,11 +1,13 @@
 package org.gujavasc.webservice.event;
 
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,39 +19,30 @@ public class Event {
 	
 	@NotNull
 	private String name;
-	private Date initialDate;
-	private Date finalDate;
 	
-	public Long getId() {
+	@OneToMany
+	private Set<Participant> participants;
+	
+	public Event() {
+		participants = new HashSet<Participant>();
+	}
+	
+	public Event(Integer id,String name) {
+		this();
+		this.id = Long.valueOf(id);
+		this.name = name;
+	}
+	
+	public Integer getTotalPaticipants(){
+		return participants.size();
+	}
+	
+	public Long getId(){
 		return id;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Date getInitialDate() {
-		return initialDate;
-	}
-
-	public void setInitialDate(Date initialDate) {
-		this.initialDate = initialDate;
-	}
-
-	public Date getFinalDate() {
-		return finalDate;
-	}
-
-	public void setFinalDate(Date finalDate) {
-		this.finalDate = finalDate;
-	}
-
-	public String getName() {
+	
+	public String getName(){
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 }

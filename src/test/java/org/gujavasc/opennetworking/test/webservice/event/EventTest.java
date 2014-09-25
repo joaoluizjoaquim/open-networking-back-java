@@ -26,7 +26,10 @@ public class EventTest {
 	
 	@Test
 	public void testa(){
-		Response response = client.target("http://localhost:8080/open-networking-back-java/event/").request().get();
+		Response response = client.target("http://localhost:8080/open-networking-back-java/events/")
+				.queryParam("q", "teste")
+				.request()
+				.get();
 		Assert.assertEquals(response.getStatus(), Status.OK.getStatusCode());
 	}
 	
