@@ -38,28 +38,27 @@ public class EventResource implements MessageBodyWriter<EventEntityResource>{
 	@Override
 	public void writeTo(EventEntityResource t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders,
 			OutputStream entityStream) throws IOException, WebApplicationException {
-		JsonGenerator gen = Json.createGenerator(entityStream);
-		JsonGenerator genContent = gen.writeStartObject().writeStartArray("content");
-				
-		List<Event> events = t.getEvents();
-		for(Event event : events){
-			genContent.writeStartObject()
-				.write("name", event.getName())
-				.write("totalParticipants", event.getTotalPaticipants())
-					.writeStartArray("links")
-						.writeStartObject()
-							.write("detail",new LinkBuilder(uriInfo)
-												.addPath(EventController.class)
-												.addPath(event.getId())
-												.addQueryParam("param1", "value1")
-												.addQueryParam("param2", "value2")
-												.build())
-						.writeEnd()
-					.writeEnd()
-				.writeEnd();
-		}
-		gen.writeEnd().writeEnd();
-        gen.flush();
+		t.write(entityStream);
+//		JsonGenerator gen = Json.createGenerator(entityStream);
+//		JsonGenerator genContent = gen.writeStartObject().writeStartArray("content");
+//				
+//		List<Event> events = t.getEvents();
+//		for(Event event : events){
+//			genContent.writeStartObject()
+//				.write("name", event.getName())
+//				.write("totalParticipants", event.getTotalPaticipants())
+//					.writeStartObject("links")
+//						.write("detail",new LinkBuilder(uriInfo)
+//											.addPath(EventController.class)
+//											.addPath(event.getId())
+//											.addQueryParam("param1", "value1")
+//											.addQueryParam("param2", "value2")
+//											.build())
+//					.writeEnd()
+//				.writeEnd();
+//		}
+//		gen.writeEnd().writeEnd();
+//        gen.flush();
 		
 		
 		

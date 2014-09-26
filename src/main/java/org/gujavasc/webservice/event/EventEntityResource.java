@@ -2,7 +2,7 @@ package org.gujavasc.webservice.event;
 
 import java.util.List;
 
-public class EventEntityResource {
+public class EventEntityResource extends AbstractEntityResource<Event> {
 
 	private List<Event> allEventsByName;
 
@@ -10,7 +10,7 @@ public class EventEntityResource {
 	}
 	
 	public EventEntityResource(List<Event> allEventsByName) {
-		this.allEventsByName = allEventsByName;
+		entity = allEventsByName.get(0);
 	}
 	
 	public List<Event> getEvents(){

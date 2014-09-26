@@ -44,10 +44,8 @@ public class EventDetailResource implements MessageBodyWriter<Event>{
 			.writeStartObject()
 				.write("id",t.getId())
 				.write("name",t.getName())
-				.writeStartArray("links")
-					.writeStartObject()
-						.write("checkin",new LinkBuilder(uriInfo).addPath(EventController.class).build())
-					.writeEnd()
+				.writeStartObject("links")
+					.write("checkin",new LinkBuilder(uriInfo).addPath(EventController.class).build())
 				.writeEnd()
 			.writeEnd();		
 		gen.writeEnd().writeEnd();
