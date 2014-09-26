@@ -39,14 +39,14 @@ public class EventDetailResource implements MessageBodyWriter<Event>{
 			OutputStream entityStream) throws IOException, WebApplicationException {
 		JsonGenerator gen = Json.createGenerator(entityStream);
 		JsonGenerator genContent = gen.writeStartObject().writeStartArray("content");
-		
+			
 		genContent
 			.writeStartObject()
 				.write("id",t.getId())
 				.write("name",t.getName())
 				.writeStartArray("links")
 					.writeStartObject()
-						.write("checkin","http://localhost:8080....")
+						.write("checkin",new LinkBuilder(uriInfo).addPath(EventController.class).build())
 					.writeEnd()
 				.writeEnd()
 			.writeEnd();		

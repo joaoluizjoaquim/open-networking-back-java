@@ -40,7 +40,7 @@ public class EventResource implements MessageBodyWriter<EventEntityResource>{
 			OutputStream entityStream) throws IOException, WebApplicationException {
 		JsonGenerator gen = Json.createGenerator(entityStream);
 		JsonGenerator genContent = gen.writeStartObject().writeStartArray("content");
-		
+				
 		List<Event> events = t.getEvents();
 		for(Event event : events){
 			genContent.writeStartObject()
@@ -48,7 +48,12 @@ public class EventResource implements MessageBodyWriter<EventEntityResource>{
 				.write("totalParticipants", event.getTotalPaticipants())
 					.writeStartArray("links")
 						.writeStartObject()
-							.write("detail",uriInfo.getAbsolutePath().toASCIIString()+"/"+event.getId())
+							.write("detail",new LinkBuilder(uriInfo)
+												.addPath(EventController.class)
+												.addPath(event.getId())
+												.addQueryParam("param1", "value1")
+												.addQueryParam("param2", "value2")
+												.build())
 						.writeEnd()
 					.writeEnd()
 				.writeEnd();
