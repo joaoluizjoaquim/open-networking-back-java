@@ -16,6 +16,8 @@ public class EventJPAImpl implements EventDAO {
 	public List<Event> findByName(String name) {
 		ArrayList<Event> arrayList = new ArrayList<>();
 		arrayList.add(new Event(1, "teste"));
+		arrayList.add(new Event(2, "teste 2"));
+		arrayList.add(new Event(3, "teste 3"));
 		return arrayList;
 	}
 

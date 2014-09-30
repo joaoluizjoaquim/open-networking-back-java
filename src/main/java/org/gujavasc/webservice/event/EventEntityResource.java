@@ -1,20 +1,21 @@
 package org.gujavasc.webservice.event;
 
-import java.util.List;
+public class EventEntityResource extends AbstractEntityResource {
 
-public class EventEntityResource extends AbstractEntityResource<Event> {
-
-	private List<Event> allEventsByName;
+	private Long id;
+	private String name;
 
 	public EventEntityResource() {
 	}
 	
-	public EventEntityResource(List<Event> allEventsByName) {
-		entity = allEventsByName.get(0);
+	public EventEntityResource(Long id, String name){
+		new LinkBuilder();
+		this.id = id;
+		this.name = name;
 	}
 	
-	public List<Event> getEvents(){
-		return allEventsByName;
+	public void detail(){
 	}
-
+	
+	
 }

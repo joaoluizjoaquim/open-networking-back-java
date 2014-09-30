@@ -1,13 +1,19 @@
 package org.gujavasc.webservice.event;
 
+import javax.enterprise.inject.spi.CDI;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 
 public class LinkBuilder {
 	
 	private StringBuilder pathUrl = new StringBuilder();
 	private StringBuilder queryParams = new StringBuilder();
+	
+	public LinkBuilder() {
+//		pathUrl.append(uriInfo.getBaseUri().toASCIIString());
+	}
 	
 	public LinkBuilder(UriInfo uriInfo) {
 		pathUrl.append(uriInfo.getBaseUri().toASCIIString());
