@@ -7,14 +7,13 @@
 		<description>Open Networking Persistence Unit</description>
 		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
-
+		<class>org.gujavasc.opennetworking.domain.participant.Participant</class>
+		<class>org.gujavasc.opennetworking.domain.event.Event</class>
+		
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
-			<property name="hibernate.transaction.flush_before_completion"
-				value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>

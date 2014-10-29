@@ -1,36 +1,40 @@
 package org.gujavasc.opennetworking.test.webservice.event;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
-import org.junit.After;
-import org.junit.Assert;
+import org.gujavasc.opennetworking.domain.event.Event;
+import org.gujavasc.opennetworking.domain.participant.Participant;
 import org.junit.Before;
 import org.junit.Test;
 
 public class EventTest {
 
-	private Client client;
+	private Participant participant;
+	private Event event;
 
 	@Before
 	public void before(){
-		client = ClientBuilder.newClient();
-	}
-	
-	@After
-	public void after(){
-		client.close();
+		participant = new Participant();
+		event = new Event();
 	}
 	
 	@Test
-	public void testa(){
-		Response response = client.target("http://localhost:8080/open-networking-back-java/events/")
-				.queryParam("q", "teste")
-				.request()
-				.get();
-		Assert.assertEquals(response.getStatus(), Status.OK.getStatusCode());
+	public void shouldCheckinEvent(){
+		event.checkin(participant);
 	}
 	
+	@Test(expected=RuntimeException.class)
+	public void shouldNotCheckinEventParticipantChecked(){
+		event.checkin(participant);
+		event.checkin(participant);
+	}
+	
+	@Test(expected=RuntimeException.class)
+	public void shouldNotCheckoutEventPartipantNotChecked(){
+		event.checkout(participant);
+	}
+	
+	@Test
+	public void shouldCheckoutParticipantEvent(){
+		event.checkin(participant);
+		event.checkout(participant);
+	}
 }

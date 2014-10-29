@@ -1,4 +1,4 @@
-package org.gujavasc.webservice.event;
+package org.gujavasc.opennetworking.domain.event;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,29 +8,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import org.gujavasc.opennetworking.domain.participant.Participant;
 
 @Entity
 public class Event {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	Long id;
 	
 	@NotNull
-	private String name;
+	String name;
 	
 	@ManyToMany
-	private Set<Participant> participants = new HashSet<Participant>();
-	
-	public Event() {}
-	
-	public Event(Integer id,String name) {
-		this();
-		this.id = Long.valueOf(id);
-		this.name = name;
-	}
+	Set<Participant> participants = new HashSet<Participant>();
 	
 	public Integer getTotalPaticipants(){
 		return participants.size();
@@ -42,6 +35,14 @@ public class Event {
 	
 	public String getName(){
 		return name;
+	}
+	
+	public void checkin(Participant participant){
+		if(!participants.add(participant)) throw new RuntimeException();
+	}
+
+	public void checkout(Participant participant) {
+		if(!participants.remove(participant)) throw new RuntimeException();
 	}
 	
 }
