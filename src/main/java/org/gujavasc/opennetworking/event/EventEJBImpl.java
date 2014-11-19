@@ -1,4 +1,4 @@
-package org.gujavasc.webservice.event;
+package org.gujavasc.opennetworking.event;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class EventEJBImpl implements EventService {
 	}
 	
 	public Event findById(Long id){
-		return new Event(1, "teste");
+		return repository.findById(id);
 	}
 	
 }

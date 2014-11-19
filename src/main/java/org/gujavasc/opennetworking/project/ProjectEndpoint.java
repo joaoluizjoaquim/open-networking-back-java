@@ -1,4 +1,4 @@
-package org.gujavasc.webservice.project;
+package org.gujavasc.opennetworking.project;
 
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;

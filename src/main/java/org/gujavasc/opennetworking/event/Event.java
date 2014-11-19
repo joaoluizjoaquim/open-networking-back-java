@@ -1,4 +1,4 @@
-package org.gujavasc.webservice.event;
+package org.gujavasc.opennetworking.event;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,14 +26,14 @@ public class Event {
 	
 	@Transient
 	private Long totalParticipants;
+		
+	public Event() {
+	}
 	
-	public Event() {}
-	
-	public Event(Integer id,String name) {
-		this();
-		this.id = Long.valueOf(id);
+	public Event(Long id, String name, Long totalParticipants){
+		this.id = id;
 		this.name = name;
-		this.totalParticipants = Long.valueOf(participants.size());
+		this.totalParticipants = totalParticipants;
 	}
 	
 	public Long getId(){
@@ -42,6 +42,11 @@ public class Event {
 	
 	public String getName(){
 		return name;
+	}
+	
+	@Transient
+	public Long getTotalParticipants(){
+		return totalParticipants;
 	}
 	
 }

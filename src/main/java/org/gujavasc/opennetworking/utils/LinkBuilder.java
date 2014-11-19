@@ -1,9 +1,7 @@
-package org.gujavasc.webservice.event;
+package org.gujavasc.opennetworking.utils;
 
-import javax.enterprise.inject.spi.CDI;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 
 public class LinkBuilder {

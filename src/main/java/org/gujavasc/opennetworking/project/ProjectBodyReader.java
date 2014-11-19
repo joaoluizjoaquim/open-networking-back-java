@@ -1,4 +1,4 @@
-package org.gujavasc.webservice.project;
+package org.gujavasc.opennetworking.project;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,4 +1,4 @@
-package org.gujavasc.webservice.event;
+package org.gujavasc.opennetworking.event;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,5 +11,7 @@ public class Participant {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
+	private String name;
 	
 }

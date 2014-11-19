@@ -1,4 +1,4 @@
-package org.gujavasc.webservice.event;
+package org.gujavasc.opennetworking.event;
 
 import java.util.List;
 

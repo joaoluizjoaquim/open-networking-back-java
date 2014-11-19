@@ -1,4 +1,4 @@
-package org.gujavasc.webservice.project;
+package org.gujavasc.opennetworking.project;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
