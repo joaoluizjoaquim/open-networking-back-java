@@ -1,6 +1,5 @@
 package org.gujavasc.webservice.event;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("events")
-public class EventController{
+public class EventResource{
 
 	@Inject
 	private EventService service;
@@ -22,10 +21,8 @@ public class EventController{
 	@Produces(value=MediaType.APPLICATION_JSON)
 	public Response findByName(@QueryParam("q") String name){
 		List<Event> allEventsByName = service.findByName(name);
-		List<EventEntityResource> eventsResource = new ArrayList<>();
-		allEventsByName.stream().forEach(event -> eventsResource.add(new EventEntityResource(event.getId(), event.getName())));
 		
-		return Response.ok(eventsResource).build();
+		return Response.ok(allEventsByName).build();
 	}
 	
 	@GET

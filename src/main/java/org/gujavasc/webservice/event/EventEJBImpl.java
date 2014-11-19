@@ -11,10 +11,10 @@ import javax.inject.Inject;
 public class EventEJBImpl implements EventService {
 
 	@Inject
-	private EventDAO dao;
+	private EventRepository repository;
 
 	public List<Event> findByName(String name){
-		return dao.findByName(name);
+		return repository.findByName(name);
 	}
 	
 	public Event findById(Long id){

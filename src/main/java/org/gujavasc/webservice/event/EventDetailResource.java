@@ -7,17 +7,13 @@ import java.lang.reflect.Type;
 
 import javax.json.Json;
 import javax.json.stream.JsonGenerator;
-import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.MessageBodyWriter;
-import javax.ws.rs.ext.Provider;
 
-@Provider
-@Produces(value=MediaType.APPLICATION_JSON)
 public class EventDetailResource implements MessageBodyWriter<Event>{
 
 	@Context
@@ -45,7 +41,7 @@ public class EventDetailResource implements MessageBodyWriter<Event>{
 				.write("id",t.getId())
 				.write("name",t.getName())
 				.writeStartObject("links")
-					.write("checkin",new LinkBuilder(uriInfo).addPath(EventController.class).build())
+					.write("checkin",new LinkBuilder(uriInfo).addPath(EventResource.class).build())
 				.writeEnd()
 			.writeEnd();		
 		gen.writeEnd().writeEnd();

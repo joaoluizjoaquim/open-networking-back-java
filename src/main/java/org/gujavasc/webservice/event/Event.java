@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,16 +24,16 @@ public class Event {
 	@ManyToMany
 	private Set<Participant> participants = new HashSet<Participant>();
 	
+	@Transient
+	private Long totalParticipants;
+	
 	public Event() {}
 	
 	public Event(Integer id,String name) {
 		this();
 		this.id = Long.valueOf(id);
 		this.name = name;
-	}
-	
-	public Integer getTotalPaticipants(){
-		return participants.size();
+		this.totalParticipants = Long.valueOf(participants.size());
 	}
 	
 	public Long getId(){

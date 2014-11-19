@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public class EventJPAImpl implements EventDAO {
+public class EventJPAImpl implements EventRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
