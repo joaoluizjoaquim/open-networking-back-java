@@ -26,7 +26,7 @@ public class EventJPAImpl implements EventRepository {
 	@Override
 	public Event findById(Long id){
 		StringBuilder jpql = new StringBuilder();
-		jpql.append(" SELECT new Event(e.id,e.name,count(p)) FROM Event e LEFT JOIN e.participants p WHERE e.id = :eventId ");
+		jpql.append(" SELECT new org.gujavasc.opennetworking.event.Event(e.id,e.name,count(p)) FROM Event e LEFT JOIN e.participants p WHERE e.id = :eventId ");
 		TypedQuery<Event> query = entityManager.createQuery(jpql.toString(),Event.class);
 		query.setParameter("eventId", id);
 		return query.getSingleResult();
