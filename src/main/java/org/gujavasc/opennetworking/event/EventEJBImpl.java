@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 
 @Local(EventService.class)
 @Stateless
@@ -12,13 +14,23 @@ public class EventEJBImpl implements EventService {
 
 	@Inject
 	private EventRepository repository;
-
+	
 	public List<Event> findByName(String name){
 		return repository.findByName(name);
 	}
 	
 	public Event findById(Long id){
 		return repository.findById(id);
+	}
+	
+	public void checkin(@NotNull Long eventId,@NotNull Long participantId){
+		Event event = repository.findParticipants(eventId);
+		Participant participant = getParticipantRepository().findById(participantId);
+		event.checkinParticipant(participant);
+	}
+	
+	private ParticipantRepository getParticipantRepository(){
+		return CDI.current().select(ParticipantRepository.class).get();
 	}
 	
 }

@@ -32,4 +32,13 @@ public class EventJPAImpl implements EventRepository {
 		return query.getSingleResult();
 	}
 
+	@Override
+	public Event findParticipants(Long id) {
+		StringBuilder jpql = new StringBuilder();
+		jpql.append(" SELECT e FROM Event e LEFT JOIN FETCH e.participants p WHERE e.id = :eventId ");
+		TypedQuery<Event> query = entityManager.createQuery(jpql.toString(),Event.class);
+		query.setParameter("eventId", id);
+		return query.getSingleResult();
+	}
+
 }

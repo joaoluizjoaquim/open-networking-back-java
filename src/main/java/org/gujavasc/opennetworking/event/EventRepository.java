@@ -7,5 +7,7 @@ public interface EventRepository {
 	List<Event> findByName(String name);
 	
 	Event findById(Long id);
+	
+	Event findParticipants(Long id);
 
 }

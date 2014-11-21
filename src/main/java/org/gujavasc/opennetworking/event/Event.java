@@ -48,5 +48,15 @@ public class Event {
 	public Long getTotalParticipants(){
 		return totalParticipants;
 	}
+
+	void checkinParticipant(Participant participant) {
+		if(participants.add(participant))
+			throw new RuntimeException("Participant already checked in event.");
+	}
+	
+	void checkoutParticipant(Participant participant){
+		if(participants.remove(participant))
+			throw new RuntimeException("Participant already checked in event.");
+	}
 	
 }
