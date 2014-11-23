@@ -1,8 +1,7 @@
 package org.gujavasc.opennetworking.test.webservice.event;
 
+import javax.ejb.EJBException;
 import javax.inject.Inject;
-
-import junit.framework.Assert;
 
 import org.gujavasc.opennetworking.event.Event;
 import org.gujavasc.opennetworking.event.EventService;
@@ -27,16 +26,16 @@ public class SampleTest {
         WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war")
             .addPackage(Event.class.getPackage())
             .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+            .addAsResource("data-load.sql","META-INF/data-load.sql")
             .addAsWebInfResource("jbossas-ds.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
         return war;
     }
 	
-	@Test
+	@Test(expected=EJBException.class)
 	public void test(){
-		Event event = service.findById(1L);
-		Assert.assertTrue(event != null);
+		service.findById(null);
 	}
  
 	

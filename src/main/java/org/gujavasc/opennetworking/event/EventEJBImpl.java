@@ -15,15 +15,17 @@ public class EventEJBImpl implements EventService {
 	@Inject
 	private EventRepository repository;
 	
+	@Override
 	public List<Event> findByName(String name){
 		return repository.findByName(name);
 	}
 	
-	public Event findById(Long id){
+	@Override
+	public Event findById(@NotNull Long id){
 		return repository.findById(id);
 	}
 	
-	public void checkin(@NotNull Long eventId,@NotNull Long participantId){
+	public void checkin(Long eventId,Long participantId){
 		Event event = repository.findParticipants(eventId);
 		Participant participant = getParticipantRepository().findById(participantId);
 		event.checkinParticipant(participant);
