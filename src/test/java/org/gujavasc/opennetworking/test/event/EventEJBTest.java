@@ -1,4 +1,4 @@
-package org.gujavasc.opennetworking.test.webservice.event;
+package org.gujavasc.opennetworking.test.event;
 
 import javax.ejb.EJBException;
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class SampleTest {
+public class EventEJBTest {
 	
 	@Inject
 	private EventService service;

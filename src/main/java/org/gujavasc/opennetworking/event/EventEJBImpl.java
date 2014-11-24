@@ -28,7 +28,7 @@ public class EventEJBImpl implements EventService {
 	public void checkin(Long eventId,Long participantId){
 		Event event = repository.findParticipants(eventId);
 		Participant participant = getParticipantRepository().findById(participantId);
-		event.checkinParticipant(participant);
+		event.checkin(participant);
 	}
 	
 	private ParticipantRepository getParticipantRepository(){
