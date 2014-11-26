@@ -12,6 +12,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.surefure.plugin>2.18</maven.surefure.plugin>
+		<maven.failsafe.plugin>2.18</maven.failsafe.plugin>
+		<maven.compiler.plugin>3.1</maven.compiler.plugin>
 	</properties>
 
 	<build>
@@ -19,7 +22,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>${maven.compiler.plugin}</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -28,12 +31,17 @@
 			<!-- Unit Test -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18</version>
+				<version>${maven.surefure.plugin}</version>
+				<configuration>
+					<excludes>
+						<exclude>**/*IntegrationTest.java</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
 			<!-- Integration Test -->
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.18</version>
+				<version>${maven.failsafe.plugin}</version>
 				<configuration>
 					<includes>
 						<include>**/*IntegrationTest.java</include>
@@ -49,24 +57,16 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- 
 			<plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>1.0.2.Final</version>
-                <configuration>
-					<hostname>127.0.0.1</hostname>
-					<port>9999</port>
-					<username>admin</username>
-					<password>123456</password>
-				</configuration>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>1.0.2.Final</version>
 				<executions>
 					<execution>
 						<id>start-server</id>
 						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>start</goal>
-							<goal>deploy</goal>
 						</goals>
 					</execution>
 					<execution>
@@ -78,7 +78,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			 -->
 		</plugins>
 	</build>
 
@@ -111,6 +110,20 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.12</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -169,7 +182,7 @@
 						GlassFish to retarget the derby log file -->
 					<plugin>
 						<artifactId>maven-surefire-plugin</artifactId>
-						<version>2.12</version>
+						<version>${maven.surefure.plugin}</version>
 						<configuration>
 							<systemPropertyVariables>
 								<java.util.logging.config.file>
