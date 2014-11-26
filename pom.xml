@@ -18,6 +18,7 @@
 	</properties>
 
 	<build>
+		<finalName>${artifactId}</finalName>
 		<defaultGoal>test</defaultGoal>
 		<plugins>
 			<plugin>
@@ -65,14 +66,19 @@
 					<execution>
 						<id>start-server</id>
 						<phase>pre-integration-test</phase>
+						<configuration>
+							<force>true</force>
+						</configuration>
 						<goals>
 							<goal>start</goal>
+							<goal>deploy</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>stop-server</id>
 						<phase>post-integration-test</phase>
 						<goals>
+							<goal>undeploy</goal>
 							<goal>shutdown</goal>
 						</goals>
 					</execution>
