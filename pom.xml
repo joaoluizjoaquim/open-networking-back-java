@@ -108,38 +108,30 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- ################# -->
-		<!-- TEST DEPENDENCIES -->
-		<!-- ################# -->
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
 			<version>2.0</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
 			<version>2.12</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>br.com.six2six</groupId>
 			<artifactId>fixture-factory</artifactId>
 			<version>2.2.0</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>
 			<artifactId>arquillian-junit-container</artifactId>
@@ -184,12 +176,15 @@
 					</testResource>
 				</testResources>
 				<plugins>
-					<!-- The surefire plugin is configured to pass a system property to 
-						GlassFish to retarget the derby log file -->
 					<plugin>
 						<artifactId>maven-surefire-plugin</artifactId>
 						<version>${maven.surefure.plugin}</version>
 						<configuration>
+							<classpathDependencyExcludes>
+								<classpathDependencyExclude>
+									javax:javaee-api
+                    			</classpathDependencyExclude>
+							</classpathDependencyExcludes>
 							<systemPropertyVariables>
 								<java.util.logging.config.file>
 									${project.build.testOutputDirectory}/logging.properties
@@ -203,6 +198,6 @@
 				</plugins>
 			</build>
 		</profile>
+		
 	</profiles>
-
 </project>

@@ -9,5 +9,7 @@ public interface EventRepository {
 	Event findById(Long id);
 	
 	Event findParticipants(Long id);
+	
+	void save(Event event);
 
 }

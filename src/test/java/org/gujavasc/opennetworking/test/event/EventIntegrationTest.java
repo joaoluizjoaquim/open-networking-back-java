@@ -13,7 +13,12 @@ public class EventIntegrationTest {
 
 	@Test
 	public void sample(){
-		Response response = ClientBuilder.newClient().target("http://localhost:8080").request().get();
+		Response response = ClientBuilder.newClient()
+				.target("http://localhost:8080")
+				.path("/open-networking-back-java")
+				.path("/events")
+				.queryParam("q", "event")
+				.request().get();
 		Assert.assertEquals(Status.OK, response.getStatus());
 	}
 	

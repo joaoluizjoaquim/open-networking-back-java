@@ -9,4 +9,8 @@ public interface EventService {
 	List<Event> findByName(String name);
 	
 	Event findById(@NotNull Long id);
+	
+	void checkin(@NotNull Long eventId,@NotNull Long participantId);
+	
+	void checkout(@NotNull Long eventId,@NotNull Long participantId);
 }

@@ -22,21 +22,33 @@ public class EventEJBTest {
 
 	@Deployment
     public static Archive<?> createDeployment() {
-        // You can use war packaging...
         WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war")
             .addPackage(Event.class.getPackage())
             .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
             .addAsResource("data-load.sql","META-INF/data-load.sql")
             .addAsWebInfResource("jbossas-ds.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-
         return war;
     }
 	
-	@Test(expected=EJBException.class)
-	public void test(){
-		service.findById(null);
+	@Test
+	public void shouldRegisterParticipantInEvent(){
+		service.checkin(4L, 1L);
 	}
- 
+	
+	@Test(expected=EJBException.class)
+	public void shouldNotCheckinEventParticipantChecked(){
+		service.checkin(1L, 3L);
+	}
+	
+	@Test(expected=EJBException.class)
+	public void shouldNotCheckoutEventPartipantNotChecked(){
+		service.checkout(1L, 4L);
+	}
+	
+	@Test
+	public void shouldCheckoutParticipantEvent(){
+		service.checkout(1L, 1L);
+	}
 	
 }

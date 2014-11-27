@@ -25,10 +25,20 @@ public class EventEJBImpl implements EventService {
 		return repository.findById(id);
 	}
 	
-	public void checkin(Long eventId,Long participantId){
+	@Override
+	public void checkin(@NotNull Long eventId,@NotNull Long participantId){
 		Event event = repository.findParticipants(eventId);
 		Participant participant = getParticipantRepository().findById(participantId);
 		event.checkin(participant);
+		repository.save(event);
+	}
+	
+	@Override
+	public void checkout(Long eventId, Long participantId) {
+		Event event = repository.findParticipants(eventId);
+		Participant participant = getParticipantRepository().findById(participantId);
+		event.checkout(participant);
+		repository.save(event);
 	}
 	
 	private ParticipantRepository getParticipantRepository(){
