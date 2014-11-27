@@ -1,4 +1,4 @@
-package org.gujavasc.opennetworking.event;
+package org.gujavasc.opennetworking.participant;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

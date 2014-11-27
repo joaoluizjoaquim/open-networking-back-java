@@ -13,6 +13,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.gujavasc.opennetworking.participant.Participant;
+
 @Entity
 @NamedQueries({
 	@NamedQuery(name=Event.FIND_NAME, query="SELECT new org.gujavasc.opennetworking.event.Event(e.id,e.name,count(p)) FROM Event e LEFT JOIN e.participants p WHERE upper(e.name) like :eventName GROUP BY e.id, p.id"),

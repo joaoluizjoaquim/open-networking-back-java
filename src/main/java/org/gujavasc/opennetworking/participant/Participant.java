@@ -1,4 +1,4 @@
-package org.gujavasc.opennetworking.event;
+package org.gujavasc.opennetworking.participant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

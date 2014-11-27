@@ -1,7 +1,7 @@
 package org.gujavasc.opennetworking.test.event;
 
 import org.gujavasc.opennetworking.event.Event;
-import org.gujavasc.opennetworking.event.Participant;
+import org.gujavasc.opennetworking.participant.Participant;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

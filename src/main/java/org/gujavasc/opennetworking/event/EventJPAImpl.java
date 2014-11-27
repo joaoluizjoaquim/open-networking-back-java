@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-public class EventJPAImpl implements EventRepository {
+class EventJPAImpl implements EventRepository {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
