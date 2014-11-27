@@ -13,7 +13,7 @@ import org.gujavasc.opennetworking.participant.ParticipantRepository;
 
 @Local(EventService.class)
 @Stateless
-class EventEJBImpl implements EventService {
+public class EventEJBImpl implements EventService {
 
 	@Inject
 	private EventRepository repository;

@@ -5,6 +5,7 @@ import javax.inject.Inject;
 
 import org.gujavasc.opennetworking.event.Event;
 import org.gujavasc.opennetworking.event.EventService;
+import org.gujavasc.opennetworking.participant.Participant;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -24,6 +25,7 @@ public class EventEJBTest {
     public static Archive<?> createDeployment() {
         WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war")
             .addPackage(Event.class.getPackage())
+            .addPackage(Participant.class.getPackage())
             .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
             .addAsResource("data-load.sql","META-INF/data-load.sql")
             .addAsWebInfResource("jbossas-ds.xml")
