@@ -2,12 +2,11 @@ package org.gujavasc.opennetworking.test.event;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import junit.framework.Assert;
 
 import org.junit.Test;
-
-import com.sun.messaging.jmq.io.Status;
 
 public class EventIntegrationTest {
 

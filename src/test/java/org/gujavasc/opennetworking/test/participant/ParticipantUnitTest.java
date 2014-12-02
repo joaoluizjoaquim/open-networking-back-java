@@ -1,4 +1,4 @@
-package org.gujavasc.opennetworking.test.event;
+package org.gujavasc.opennetworking.test.participant;
 
 import org.gujavasc.opennetworking.event.Event;
 import org.gujavasc.opennetworking.event.Participant;
@@ -9,23 +9,24 @@ import org.junit.Test;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 
-public class EventUnitTest {
+public class ParticipantUnitTest {
 
 	private Participant participant;
 	private Event eventWithEmptyParticipants;
 
 	@BeforeClass
 	public static void preparteObjectFactory(){
-		Fixture.of(Event.class).addTemplate("withOneParticipant", new Rule(){{
+		Fixture.of(Participant.class).addTemplate("withOneEvent", new Rule(){{
 			add("id", random(Long.class, range(1L, 3L)));
-			add("name","event 1");
-			add("participants", has(1).of(Participant.class,"first") );
+			add("name",random("participant 1"));
+			add("events", has(1).of(Event.class,"first") );
 		}});
 				
-		Fixture.of(Participant.class).addTemplate("first",new Rule(){{
+		Fixture.of(Event.class).addTemplate("first",new Rule(){{
 			add("id", 1L);
-			add("name", "participant 1");
-		}});		
+			add("name","event 1");
+		}});
+		
 	}
 	
 	@Before
@@ -36,26 +37,26 @@ public class EventUnitTest {
 	
 	@Test
 	public void shouldRegisterParticipantInEvent(){
-		eventWithEmptyParticipants.checkin(participant);
+		participant.checkin(eventWithEmptyParticipants);
 	}
 	
 	@Test(expected=RuntimeException.class)
 	public void shouldNotCheckinEventParticipantChecked(){
-		Event event = Fixture.from(Event.class).gimme("withOneParticipant");
-		Participant participant = Fixture.from(Participant.class).gimme("first");
-		event.checkin(participant);
+		Participant participant = Fixture.from(Participant.class).gimme("withOneEvent");
+		Event event = Fixture.from(Event.class).gimme("first");
+		participant.checkin(event);
 	}
 	
 	@Test(expected=RuntimeException.class)
 	public void shouldNotCheckoutEventPartipantNotChecked(){
-		eventWithEmptyParticipants.checkout(participant);
+		participant.checkout(eventWithEmptyParticipants);
 	}
 	
 	@Test
 	public void shouldCheckoutParticipantEvent(){
-		Event event = Fixture.from(Event.class).gimme("withOneParticipant");
-		Participant participant = Fixture.from(Participant.class).gimme("first");
-		event.checkout(participant);
+		Participant participant = Fixture.from(Participant.class).gimme("withOneEvent");
+		Event event = Fixture.from(Event.class).gimme("first");
+		participant.checkout(event);
 	}
 	
 }

@@ -5,7 +5,6 @@ import javax.inject.Inject;
 
 import org.gujavasc.opennetworking.event.Event;
 import org.gujavasc.opennetworking.event.EventService;
-import org.gujavasc.opennetworking.participant.Participant;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -23,12 +22,10 @@ public class EventEJBTest {
 
 	@Deployment
     public static Archive<?> createDeployment() {
-        WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war")
+        WebArchive war = ShrinkWrap.create(WebArchive.class)
             .addPackage(Event.class.getPackage())
-            .addPackage(Participant.class.getPackage())
             .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
             .addAsResource("data-load.sql","META-INF/data-load.sql")
-            .addAsWebInfResource("jbossas-ds.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
         return war;
     }
@@ -40,7 +37,7 @@ public class EventEJBTest {
 	
 	@Test(expected=EJBException.class)
 	public void shouldNotCheckinEventParticipantChecked(){
-		service.checkin(1L, 3L);
+		service.checkin(1L, 2L);
 	}
 	
 	@Test(expected=EJBException.class)

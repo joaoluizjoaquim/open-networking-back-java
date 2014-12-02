@@ -15,6 +15,7 @@
 		<maven.surefure.plugin>2.18</maven.surefure.plugin>
 		<maven.failsafe.plugin>2.18</maven.failsafe.plugin>
 		<maven.compiler.plugin>3.1</maven.compiler.plugin>
+		<version.org.wildfly>8.1.0.Final</version.org.wildfly>
 	</properties>
 
 	<build>
@@ -96,17 +97,11 @@
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
-			<scope>provided</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -114,27 +109,37 @@
 			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
 			<version>2.0</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
 			<version>2.12</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>br.com.six2six</groupId>
 			<artifactId>fixture-factory</artifactId>
 			<version>2.2.0</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.jboss.arquillian.junit</groupId>
 			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.arquillian.protocol</groupId>
+			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>test</scope>
 		</dependency>
 
@@ -142,11 +147,12 @@
 
 	<profiles>
 		<profile>
-			<id>arquillian-glassfish-embedded</id>
+			<id>arq-glassfish-embedded</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<dependencies>
+
 				<dependency>
 					<groupId>org.jboss.arquillian.container</groupId>
 					<artifactId>arquillian-glassfish-embedded-3.1</artifactId>
@@ -180,11 +186,6 @@
 						<artifactId>maven-surefire-plugin</artifactId>
 						<version>${maven.surefure.plugin}</version>
 						<configuration>
-							<classpathDependencyExcludes>
-								<classpathDependencyExclude>
-									javax:javaee-api
-                    			</classpathDependencyExclude>
-							</classpathDependencyExcludes>
 							<systemPropertyVariables>
 								<java.util.logging.config.file>
 									${project.build.testOutputDirectory}/logging.properties
@@ -198,6 +199,21 @@
 				</plugins>
 			</build>
 		</profile>
-		
+
+
+		<profile>
+			<id>arq-widlfly-remote</id>
+			<dependencies>
+
+				<dependency>
+					<groupId>org.wildfly</groupId>
+					<artifactId>wildfly-arquillian-container-remote</artifactId>
+					<version>${version.org.wildfly}</version>
+					<scope>test</scope>
+				</dependency>
+				
+			</dependencies>
+		</profile>
+
 	</profiles>
 </project>

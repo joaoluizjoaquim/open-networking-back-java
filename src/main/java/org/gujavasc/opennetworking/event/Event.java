@@ -13,8 +13,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.gujavasc.opennetworking.participant.Participant;
-
 @Entity
 @NamedQueries({
 	@NamedQuery(name=Event.FIND_NAME, query="SELECT new org.gujavasc.opennetworking.event.Event(e.id,e.name,count(p)) FROM Event e LEFT JOIN e.participants p WHERE upper(e.name) like :eventName GROUP BY e.id, p.id"),
@@ -34,7 +32,7 @@ public class Event {
 	@NotNull
 	private String name;
 	
-	@ManyToMany
+	@ManyToMany()
 	private Set<Participant> participants = new HashSet<Participant>();
 	
 	@Transient
@@ -71,5 +69,38 @@ public class Event {
 		if(!participants.remove(participant))
 			throw new RuntimeException("Participant already checked in event.");
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Event other = (Event) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+	
+	
 	
 }

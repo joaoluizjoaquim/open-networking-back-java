@@ -1,4 +1,4 @@
-package org.gujavasc.opennetworking.participant;
+package org.gujavasc.opennetworking.event;
 
 
 public interface ParticipantRepository {

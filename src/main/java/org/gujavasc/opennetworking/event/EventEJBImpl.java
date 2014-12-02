@@ -8,9 +8,6 @@ import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
-import org.gujavasc.opennetworking.participant.Participant;
-import org.gujavasc.opennetworking.participant.ParticipantRepository;
-
 @Local(EventService.class)
 @Stateless
 public class EventEJBImpl implements EventService {
