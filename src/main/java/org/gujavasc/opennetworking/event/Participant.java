@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 @Entity
 public class Participant {
@@ -18,6 +18,7 @@ public class Participant {
 	
 	private String name;
 	
+	@Transient
 	private Set<Event> events = new HashSet<>();
 
 	public void checkin(Event event){

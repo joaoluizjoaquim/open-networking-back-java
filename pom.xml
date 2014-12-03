@@ -206,12 +206,19 @@
 			<dependencies>
 
 				<dependency>
-					<groupId>org.wildfly</groupId>
+					<groupId>javax</groupId>
+					<artifactId>javaee-api</artifactId>
+					<version>7.0</version>
+					<scope>provided</scope>
+				</dependency>
+
+				<dependency>
+					<groupId>org.wildfly.arquillian</groupId>
 					<artifactId>wildfly-arquillian-container-remote</artifactId>
-					<version>${version.org.wildfly}</version>
+					<version>1.0.0.Alpha4</version>
 					<scope>test</scope>
 				</dependency>
-				
+
 			</dependencies>
 		</profile>
 

@@ -22,10 +22,11 @@ public class EventEJBTest {
 
 	@Deployment
     public static Archive<?> createDeployment() {
-        WebArchive war = ShrinkWrap.create(WebArchive.class)
+        WebArchive war = ShrinkWrap.create(WebArchive.class,"eventTest.war")
             .addPackage(Event.class.getPackage())
             .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
             .addAsResource("data-load.sql","META-INF/data-load.sql")
+            .addAsWebInfResource("jbossas-ds.xml")
             .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
         return war;
     }
