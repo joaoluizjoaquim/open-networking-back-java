@@ -18,7 +18,7 @@ public class EventIntegrationTest {
 				.path("/events")
 				.queryParam("q", "event")
 				.request().get();
-		Assert.assertEquals(Status.OK, response.getStatus());
+		Assert.assertEquals(Status.OK, Status.fromStatusCode(response.getStatus()));
 	}
 	
 }
