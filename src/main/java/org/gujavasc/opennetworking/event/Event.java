@@ -67,7 +67,7 @@ public class Event {
 	
 	public void checkout(Participant participant){
 		if(!participants.remove(participant))
-			throw new RuntimeException("Participant already checked in event.");
+			throw new RuntimeException("Participant not checked in event.");
 	}
 
 	@Override

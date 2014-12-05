@@ -15,7 +15,6 @@
 		<maven.surefure.plugin>2.18</maven.surefure.plugin>
 		<maven.failsafe.plugin>2.18</maven.failsafe.plugin>
 		<maven.compiler.plugin>3.1</maven.compiler.plugin>
-		<version.org.wildfly>8.1.0.Final</version.org.wildfly>
 	</properties>
 
 	<build>
