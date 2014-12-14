@@ -32,7 +32,7 @@ public class Event {
 	@NotNull
 	private String name;
 	
-	@ManyToMany()
+	@ManyToMany(mappedBy="events")
 	private Set<Participant> participants = new HashSet<Participant>();
 	
 	@Transient

@@ -37,26 +37,26 @@ public class ParticipantUnitTest {
 	
 	@Test
 	public void shouldRegisterParticipantInEvent(){
-		participant.checkin(eventWithEmptyParticipants);
+		participant.addEvent(eventWithEmptyParticipants);
 	}
 	
 	@Test(expected=RuntimeException.class)
-	public void shouldNotCheckinEventParticipantChecked(){
+	public void shouldNotaddEventEventParticipantChecked(){
 		Participant participant = Fixture.from(Participant.class).gimme("withOneEvent");
 		Event event = Fixture.from(Event.class).gimme("first");
-		participant.checkin(event);
+		participant.addEvent(event);
 	}
 	
 	@Test(expected=RuntimeException.class)
-	public void shouldNotCheckoutEventPartipantNotChecked(){
-		participant.checkout(eventWithEmptyParticipants);
+	public void shouldNotremoveEventEventPartipantNotChecked(){
+		participant.removeEvent(eventWithEmptyParticipants);
 	}
 	
 	@Test
-	public void shouldCheckoutParticipantEvent(){
+	public void shouldremoveEventParticipantEvent(){
 		Participant participant = Fixture.from(Participant.class).gimme("withOneEvent");
 		Event event = Fixture.from(Event.class).gimme("first");
-		participant.checkout(event);
+		participant.removeEvent(event);
 	}
 	
 }

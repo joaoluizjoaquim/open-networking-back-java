@@ -19,10 +19,13 @@ public class EventEJBTest {
 	
 	@Inject
 	private EventService service;
+	
+	private Long eventIdWithParticipants = 1L;
+	private Long eventIdEmptyParticipants = 4L;
 
 	@Deployment
     public static Archive<?> createDeployment() {
-        WebArchive war = ShrinkWrap.create(WebArchive.class,"eventTest.war")
+        WebArchive war = ShrinkWrap.create(WebArchive.class)
             .addPackage(Event.class.getPackage())
             .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
             .addAsResource("data-load.sql","META-INF/data-load.sql")
@@ -33,22 +36,22 @@ public class EventEJBTest {
 	
 	@Test
 	public void shouldRegisterParticipantInEvent(){
-		service.checkin(4L, 1L);
+		service.checkin(eventIdEmptyParticipants, 1L);
 	}
 	
 	@Test(expected=EJBException.class)
 	public void shouldNotCheckinEventParticipantChecked(){
-		service.checkin(1L, 2L);
+		service.checkin(eventIdWithParticipants, 2L);
 	}
 	
 	@Test(expected=EJBException.class)
 	public void shouldNotCheckoutEventPartipantNotChecked(){
-		service.checkout(1L, 4L);
+		service.checkout(eventIdWithParticipants, 4L);
 	}
 	
 	@Test
 	public void shouldCheckoutParticipantEvent(){
-		service.checkout(1L, 1L);
+		service.checkout(eventIdWithParticipants, 1L);
 	}
 	
 }

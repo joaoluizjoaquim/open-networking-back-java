@@ -11,11 +11,21 @@ class ParticipantJPAImpl implements ParticipantRepository {
 		
 	@Override
 	public Participant findById(Long id){
-		StringBuilder jpql = new StringBuilder();
-		jpql.append(" SELECT p FROM Participant p WHERE p.id = :participantId ");
-		TypedQuery<Participant> query = entityManager.createQuery(jpql.toString(),Participant.class);
+		TypedQuery<Participant> query = entityManager.createNamedQuery(Participant.FIND_ID, Participant.class);
 		query.setParameter("participantId", id);
 		return query.getSingleResult();
+	}
+	
+	@Override
+	public Participant findByIdWithEvents(Long id){
+		TypedQuery<Participant> query = entityManager.createNamedQuery(Participant.FIND_ID, Participant.class);
+		query.setParameter("participantId", id);
+		return query.getSingleResult();
+	}
+
+	@Override
+	public void update(Participant participant) {
+		entityManager.merge(participant);
 	}
 
 }

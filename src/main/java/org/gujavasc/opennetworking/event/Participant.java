@@ -3,33 +3,49 @@ package org.gujavasc.opennetworking.event;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name=Participant.FIND_ID, query="SELECT p FROM Participant p WHERE p.id = :participantId "),
+	@NamedQuery(name=Participant.FIND_EVENTS, query="SELECT p FROM Participant p LEFT JOIN FETCH p.events WHERE p.id = :participantId")
+})
 public class Participant {
 
+	public static final String FIND_ID = "Participant.findById";
+	public static final String FIND_EVENTS = "Event.findEvents";
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
 	private String name;
 	
-	@Transient
+	@ElementCollection
+	private Set<String> skills = new HashSet<>();
+	
+	@ManyToMany
 	private Set<Event> events = new HashSet<>();
-
-	public void checkin(Event event){
-		if(!events.add(event))
-			throw new RuntimeException("Participant already checked in event.");
+	
+	public void addEvent(Event event){
+		if(!events.add(event)){
+			throw new RuntimeException();
+		}
 	}
 	
-	public void checkout(Event event){
-		if(!events.remove(event))
-			throw new RuntimeException("Participant not already checked in event.");
+	public void removeEvent(Event event){
+		if(!events.remove(event)){
+			throw new RuntimeException();
+		}
 	}
+	
 
 	@Override
 	public int hashCode() {
