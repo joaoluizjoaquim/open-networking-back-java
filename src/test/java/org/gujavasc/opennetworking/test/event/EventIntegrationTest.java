@@ -9,13 +9,20 @@ import javax.ws.rs.core.Response.Status;
 
 import junit.framework.Assert;
 
+import org.gujavasc.opennetworking.event.Event;
+import org.gujavasc.opennetworking.event.Participant;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import br.com.six2six.fixturefactory.Fixture;
 
 public class EventIntegrationTest {
 
 	private String server = "http://localhost:8080";
 	private String contextPath = "/open-networking-back-java";
 	private String resourcePath = "/events";
+	private String validEventIdPath = "/1";
+	private String checkinPath = "/checkin";
 
 	@Test
 	public void shouldReturnStatusNotFoundForNonExistentResource(){
@@ -26,14 +33,50 @@ public class EventIntegrationTest {
 	@Test
 	public void shouldCheckinParticipantInEvent(){
 		Form form = new Form();
-		form.param("participantId", "4");
-		Response response = urlEventResource().path("/1").path("/checkin").request().post(Entity.form(form));
+		validParticipantForm(form);
+		Response response = urlEventResource()
+				.path(validEventIdPath)
+				.path(checkinPath)
+				.request()
+				.post(Entity.form(form));
 		Assert.assertEquals(Status.ACCEPTED, Status.fromStatusCode(response.getStatus()));
+	}
+	
+	@Test
+	@Ignore
+	public void shouldNotCheckinEventParticipantChecked(){
+		Form form = new Form();
+		invalidParticipantForm(form);
+		Response response = urlEventResource()
+				.path(validEventIdPath)
+				.path(checkinPath)
+				.request()
+				.post(Entity.form(form));
+		Assert.assertEquals(Status.ACCEPTED, Status.fromStatusCode(response.getStatus()));
+	}
+	
+	@Test
+	@Ignore
+	public void shouldNotCheckoutEventPartipantNotChecked(){
+		
+	}
+	
+	@Test
+	@Ignore
+	public void shouldCheckoutParticipantEvent(){
 	}
 	
 	private WebTarget urlEventResource() {
 		return ClientBuilder.newClient().target(server).path(contextPath)
 				.path(resourcePath);
+	}
+	
+	private Form validParticipantForm(Form form) {
+		return form.param("participantId", "4");
+	}
+	
+	private Form invalidParticipantForm(Form form) {
+		return form.param("participantId", "9");
 	}
 	
 }

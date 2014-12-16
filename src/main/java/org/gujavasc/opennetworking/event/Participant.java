@@ -27,7 +27,9 @@ public class Participant {
 	private Long id;
 	
 	private String name;
-	
+	private String email;
+	private String phone;
+		
 	@ElementCollection
 	private Set<String> skills = new HashSet<>();
 	
@@ -78,6 +80,16 @@ public class Participant {
 		return true;
 	}
 	
-		
+	public String getName() {
+		return name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
 	
 }
