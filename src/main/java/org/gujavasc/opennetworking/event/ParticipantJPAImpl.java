@@ -36,7 +36,7 @@ class ParticipantJPAImpl implements ParticipantRepository {
 
 	@Override
 	public List<Participant> findParticipantsBySkill(Long eventId, String skill) {
-		TypedQuery<Participant> query = entityManager.createNamedQuery(Participant.FIND_SKILLS, Participant.class);
+		TypedQuery<Participant> query = entityManager.createNamedQuery(Participant.FIND_SKILLS_EVENT, Participant.class);
 		
 		query.setParameter("eventId", eventId);
 		query.setParameter("skill", "%"+skill.toUpperCase()+"%");

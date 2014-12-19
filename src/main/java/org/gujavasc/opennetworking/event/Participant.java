@@ -15,16 +15,19 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name=Participant.FIND_ID, 
 			query="SELECT p FROM Participant p WHERE p.id = :participantId "),
+	@NamedQuery(name=Participant.FIND_SKILLS,
+			query="SELECT p FROM Participant p LEFT JOIN FETCH p.skills WHERE p.id = :participantId "),
 	@NamedQuery(name=Participant.FIND_EVENTS, 
 			query="SELECT p FROM Participant p LEFT JOIN FETCH p.events WHERE p.id = :participantId "),
-	@NamedQuery(name=Participant.FIND_SKILLS, 
+	@NamedQuery(name=Participant.FIND_SKILLS_EVENT, 
 			query="SELECT p FROM Participant p JOIN p.events e JOIN p.skills s WHERE upper(s.name) like :skill and e.id = :eventId ")
 })
 public class Participant {
 
 	public static final String FIND_ID = "Participant.findById";
 	public static final String FIND_EVENTS = "Event.findEvents";
-	public static final String FIND_SKILLS = "Event.findBySkills";
+	public static final String FIND_SKILLS = "Event.findSkills";
+	public static final String FIND_SKILLS_EVENT = "Event.findBySkillsEvent";
 		
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -34,7 +37,7 @@ public class Participant {
 	private String email;
 	private String phone;
 	
-	@ManyToMany()
+	@ManyToMany
 	private Set<Skill> skills = new HashSet<>();
 	
 	@ManyToMany
@@ -52,6 +55,17 @@ public class Participant {
 		}
 	}
 	
+	public String getName() {
+		return name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
 
 	@Override
 	public int hashCode() {
@@ -83,17 +97,6 @@ public class Participant {
 			return false;
 		return true;
 	}
-	
-	public String getName() {
-		return name;
-	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
 	
 }
