@@ -1,7 +1,6 @@
 package org.gujavasc.opennetworking.event;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
@@ -42,13 +41,13 @@ public class EventEJBImpl implements EventService {
 		repository.save(event);
 	}
 	
+	@Override
+	public List<Participant> findParticipantsBySkill(@NotNull Long eventId,@NotNull String skill){
+		return getParticipantRepository().findParticipantsBySkill(eventId,skill);
+	}
+
 	private ParticipantRepository getParticipantRepository(){
 		return CDI.current().select(ParticipantRepository.class).get();
 	}
 
-	@Override
-	public Set<Participant> findParticipantsBySkill(Long eventId, String string) {
-		return null;
-	}
-	
 }

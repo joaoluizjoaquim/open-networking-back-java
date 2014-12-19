@@ -15,5 +15,5 @@ public interface EventService {
 	
 	void checkout(@NotNull Long eventId,@NotNull Long participantId);
 
-	Set<Participant> findParticipantsBySkill(@NotNull Long eventId,@NotNull String string);
+	List<Participant> findParticipantsBySkill(@NotNull Long eventId,@NotNull String string);
 }

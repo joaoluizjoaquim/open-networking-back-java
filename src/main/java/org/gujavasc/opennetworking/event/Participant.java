@@ -3,7 +3,6 @@ package org.gujavasc.opennetworking.event;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,14 +13,19 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name=Participant.FIND_ID, query="SELECT p FROM Participant p WHERE p.id = :participantId "),
-	@NamedQuery(name=Participant.FIND_EVENTS, query="SELECT p FROM Participant p LEFT JOIN FETCH p.events WHERE p.id = :participantId")
+	@NamedQuery(name=Participant.FIND_ID, 
+			query="SELECT p FROM Participant p WHERE p.id = :participantId "),
+	@NamedQuery(name=Participant.FIND_EVENTS, 
+			query="SELECT p FROM Participant p LEFT JOIN FETCH p.events WHERE p.id = :participantId "),
+	@NamedQuery(name=Participant.FIND_SKILLS, 
+			query="SELECT p FROM Participant p JOIN p.events e JOIN p.skills s WHERE upper(s.name) like :skill and e.id = :eventId ")
 })
 public class Participant {
 
 	public static final String FIND_ID = "Participant.findById";
 	public static final String FIND_EVENTS = "Event.findEvents";
-	
+	public static final String FIND_SKILLS = "Event.findBySkills";
+		
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -29,9 +33,9 @@ public class Participant {
 	private String name;
 	private String email;
 	private String phone;
-		
-	@ElementCollection
-	private Set<String> skills = new HashSet<>();
+	
+	@ManyToMany()
+	private Set<Skill> skills = new HashSet<>();
 	
 	@ManyToMany
 	private Set<Event> events = new HashSet<>();

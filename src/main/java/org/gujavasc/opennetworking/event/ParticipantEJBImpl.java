@@ -33,7 +33,7 @@ public class ParticipantEJBImpl implements ParticipantService {
 		participant.removeEvent(event);
 		repository.update(participant);
 	}
-
+	
 	private EventRepository getParticipantRepository(){
 		return CDI.current().select(EventRepository.class).get();
 	}

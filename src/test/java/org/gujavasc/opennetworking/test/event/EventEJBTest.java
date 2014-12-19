@@ -1,10 +1,15 @@
 package org.gujavasc.opennetworking.test.event;
 
+import java.util.List;
+
 import javax.ejb.EJBException;
 import javax.inject.Inject;
 
+import junit.framework.Assert;
+
 import org.gujavasc.opennetworking.event.Event;
 import org.gujavasc.opennetworking.event.EventService;
+import org.gujavasc.opennetworking.event.Participant;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -53,5 +58,12 @@ public class EventEJBTest {
 	public void shouldCheckoutParticipantEvent(){
 		service.checkout(eventIdWithParticipants, 1L);
 	}
+	
+	@Test
+	public void shouldFindParticipantWithSkill(){
+		List<Participant> participantsFound = service.findParticipantsBySkill(eventIdWithParticipants, "Java");
+		Assert.assertEquals(2,participantsFound.size());
+	}
+	
 	
 }
