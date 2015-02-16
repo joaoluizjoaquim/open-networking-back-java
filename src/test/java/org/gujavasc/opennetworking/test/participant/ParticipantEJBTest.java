@@ -1,12 +1,14 @@
 package org.gujavasc.opennetworking.test.participant;
 
-import javax.ejb.EJBException;
 import javax.inject.Inject;
 
 import org.gujavasc.opennetworking.event.Participant;
 import org.gujavasc.opennetworking.event.ParticipantService;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit.InSequence;
+import org.jboss.arquillian.persistence.Cleanup;
+import org.jboss.arquillian.persistence.UsingDataSet;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -20,9 +22,6 @@ public class ParticipantEJBTest {
 
 	@Inject
 	private ParticipantService service;
-
-	private Long eventIdWithParticipants = 1L;
-	private Long eventIdEmptyParticipants = 4L;
 
 	@Deployment
 	public static Archive<?> createDeployment() {
@@ -38,29 +37,12 @@ public class ParticipantEJBTest {
 	}
 
 	@Test
-	public void shouldFindParticipant() {
+	@InSequence(1)
+	@UsingDataSet("simple_participant.yml")
+	@Cleanup()
+	public void shouldFindParticipantById() {
 		Participant participant = service.findById(1L);
 		Assert.assertNotNull(participant);
-	}
-
-	@Test
-	public void shouldRegisterParticipantInEvent() {
-		service.checkin(eventIdEmptyParticipants, 1L);
-	}
-
-	@Test(expected = EJBException.class)
-	public void shouldNotCheckinEventParticipantChecked() {
-		service.checkin(eventIdWithParticipants, 2L);
-	}
-
-	@Test(expected = EJBException.class)
-	public void shouldNotCheckoutEventPartipantNotChecked() {
-		service.checkout(eventIdWithParticipants, 4L);
-	}
-
-	@Test
-	public void shouldCheckoutParticipantEvent() {
-		service.checkout(eventIdWithParticipants, 1L);
 	}
 
 }

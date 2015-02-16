@@ -1,0 +1,10 @@
+event:
+  - id: 1
+    name: "Serra StarTec 2014"
+    totalParticipants: 0
+participant:
+  - id: 1
+    name: "John"
+event_participant:
+  - events_id: 1
+    participants_id: 1

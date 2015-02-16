@@ -30,7 +30,7 @@ public class EventEJBImpl implements EventService {
 		Event event = repository.findParticipants(eventId);
 		Participant participant = getParticipantRepository().findById(participantId);
 		event.checkin(participant);
-		repository.save(event);
+		repository.update(event);
 	}
 	
 	@Override
@@ -43,7 +43,7 @@ public class EventEJBImpl implements EventService {
 	
 	@Override
 	public List<Participant> findParticipantsBySkill(@NotNull Long eventId,@NotNull String skill){
-		return getParticipantRepository().findParticipantsBySkill(eventId,skill);
+		return repository.findParticipantsBySkill(eventId,skill);
 	}
 
 	private ParticipantRepository getParticipantRepository(){

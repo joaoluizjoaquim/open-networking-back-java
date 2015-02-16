@@ -1,8 +1,5 @@
 package org.gujavasc.opennetworking.event;
 
-import java.util.List;
-
-
 public interface ParticipantRepository {
 	
 	Participant findById(Long id);
@@ -10,7 +7,5 @@ public interface ParticipantRepository {
 	Participant findByIdWithEvents(Long id);
 
 	void update(Participant participant);
-
-	List<Participant> findParticipantsBySkill(Long eventId, String skill);
 
 }

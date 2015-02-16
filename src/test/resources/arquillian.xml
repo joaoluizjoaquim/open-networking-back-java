@@ -24,4 +24,11 @@
 		</configuration>
 	</container>
 
+	<!-- extensions -->
+	<extension qualifier="persistence">
+		<property name="defaultDataSource">jdbc/arquillian</property>
+		<!-- <property name="defaultDataSeedStrategy">CLEAN_INSERT</property> -->
+		<property name="defaultCleanupPhase">NONE</property>
+	</extension>
+
 </arquillian>

@@ -40,21 +40,9 @@ public class Participant {
 	@ManyToMany
 	private Set<Skill> skills = new HashSet<>();
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="participants")
 	private Set<Event> events = new HashSet<>();
-	
-	public void addEvent(Event event){
-		if(!events.add(event)){
-			throw new RuntimeException();
-		}
-	}
-	
-	public void removeEvent(Event event){
-		if(!events.remove(event)){
-			throw new RuntimeException();
-		}
-	}
-	
+		
 	public String getName() {
 		return name;
 	}

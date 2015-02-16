@@ -9,12 +9,8 @@ import javax.ws.rs.core.Response.Status;
 
 import junit.framework.Assert;
 
-import org.gujavasc.opennetworking.event.Event;
-import org.gujavasc.opennetworking.event.Participant;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import br.com.six2six.fixturefactory.Fixture;
 
 public class EventIntegrationTest {
 

@@ -1,8 +1,9 @@
 package org.gujavasc.opennetworking.test.event;
 
+import junit.framework.Assert;
+
 import org.gujavasc.opennetworking.event.Event;
 import org.gujavasc.opennetworking.event.Participant;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -11,14 +12,13 @@ import br.com.six2six.fixturefactory.Rule;
 
 public class EventUnitTest {
 
-	private Participant participant;
-	private Event eventWithEmptyParticipants;
-
+	
 	@BeforeClass
 	public static void preparteObjectFactory(){
 		Fixture.of(Event.class).addTemplate("withOneParticipant", new Rule(){{
 			add("id", random(Long.class, range(1L, 3L)));
 			add("name","event 1");
+			add("totalParticipants", 1L);
 			add("participants", has(1).of(Participant.class,"first") );
 		}});
 				
@@ -28,15 +28,12 @@ public class EventUnitTest {
 		}});		
 	}
 	
-	@Before
-	public void before(){
-		participant = new Participant();
-		eventWithEmptyParticipants = new Event();
-	}
-	
 	@Test
 	public void shouldRegisterParticipantInEvent(){
-		eventWithEmptyParticipants.checkin(participant);
+		Event event = new Event(1L, "Event 1");
+		Participant participant = new Participant();
+		event.checkin(participant);
+		Assert.assertEquals(event.getTotalParticipants(), Long.valueOf(1L));
 	}
 	
 	@Test(expected=RuntimeException.class)
@@ -48,7 +45,9 @@ public class EventUnitTest {
 	
 	@Test(expected=RuntimeException.class)
 	public void shouldNotCheckoutEventPartipantNotChecked(){
-		eventWithEmptyParticipants.checkout(participant);
+		Event event = new Event(1L, "Event 1");
+		Participant participant = new Participant();
+		event.checkout(participant);
 	}
 	
 	@Test
@@ -56,6 +55,7 @@ public class EventUnitTest {
 		Event event = Fixture.from(Event.class).gimme("withOneParticipant");
 		Participant participant = Fixture.from(Participant.class).gimme("first");
 		event.checkout(participant);
+		Assert.assertEquals(event.getTotalParticipants(), Long.valueOf(0L));
 	}
 	
 }

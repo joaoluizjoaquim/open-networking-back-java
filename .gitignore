@@ -214,3 +214,10 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 /target/
+
+#Intellij
+.idea/
+
+#Netbeans
+nb-configuration.xml
+

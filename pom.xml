@@ -7,7 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>java</name>
+	<name>open networking - core</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -141,7 +141,44 @@
 			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- Arquillian Persistence Extension -->	
 
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-persistence-api</artifactId>
+			<version>1.0.0.Alpha7</version>
+			<scope>test</scope>
+		</dependency>
+		
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.arquillian.extension</groupId> -->
+<!-- 			<artifactId>arquillian-persistence-core</artifactId> -->
+<!-- 			<version>1.0.0.Alpha7</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+
+		<dependency>
+			<groupId>org.jboss.arquillian.extension</groupId>
+			<artifactId>arquillian-persistence-dbunit</artifactId>
+			<version>1.0.0.Alpha7</version>
+			<scope>test</scope>
+		</dependency>
+		
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.arquillian.extension</groupId> -->
+<!-- 			<artifactId>arquillian-persistence-spi</artifactId> -->
+<!-- 			<version>1.0.0.Alpha7</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.jboss.arquillian.extension</groupId> -->
+<!-- 			<artifactId>arquillian-persistence-integration-tests</artifactId> -->
+<!-- 			<version>1.0.0.Alpha7</version> -->
+<!-- 			<scope>test</scope> -->
+<!-- 		</dependency> -->
+		
 	</dependencies>
 
 	<profiles>

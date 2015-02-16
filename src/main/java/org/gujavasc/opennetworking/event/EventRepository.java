@@ -11,5 +11,9 @@ public interface EventRepository {
 	Event findParticipants(Long id);
 	
 	void save(Event event);
+	
+	void update(Event event);
 
+	List<Participant> findParticipantsBySkill(Long eventId, String skill);
+	
 }
