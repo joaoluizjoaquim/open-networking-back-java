@@ -1,4 +1,4 @@
-open-networking-back-java
+open-networking-java-ee
 =========================
 
 Baseado na ideia do projeto Open Networking, esse projeto é uma implementação utilizando a stack Java EE.
