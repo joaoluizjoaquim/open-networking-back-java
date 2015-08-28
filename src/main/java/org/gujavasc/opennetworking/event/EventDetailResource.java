@@ -16,8 +16,6 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
-import org.gujavasc.opennetworking.utils.LinkBuilder;
-
 @Provider
 @Produces(value = MediaType.APPLICATION_JSON)
 public class EventDetailResource implements MessageBodyWriter<Event> {
