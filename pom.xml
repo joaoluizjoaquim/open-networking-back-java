@@ -3,12 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.gujavasc</groupId>
-	<artifactId>open-networking-back-java</artifactId>
+	<artifactId>open-networking-java-ee</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>open networking - core</name>
-	<url>http://maven.apache.org</url>
+	<name>open networking - Java EE</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
