@@ -15,7 +15,7 @@ import org.junit.Test;
 public class EventIntegrationTest {
 
 	private String server = "http://localhost:8080";
-	private String contextPath = "/open-networking-back-java";
+	private String contextPath = "/open-networking-java-ee";
 	private String resourcePath = "/events";
 	private String validEventIdPath = "/1";
 	private String checkinPath = "/checkin";
